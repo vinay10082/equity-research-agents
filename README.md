@@ -9,7 +9,7 @@ This repository contains an **Objective Equity Research Agent** built using Stre
 ## Prerequisites
 
 - AWS CLI configured (`aws configure`) with valid credentials and the appropriate region (e.g., `us-east-1`) to access Amazon Bedrock.
-- Python packages installed (e.g., `streamlit`, `boto3`).
+- Python 3.10+ with dependencies installed: `python -m pip install streamlit boto3`
 
 ## How to Run
 
