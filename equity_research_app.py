@@ -91,17 +91,21 @@ def main():
     if st.button("Generate Research Brief", type="primary"):
         if not ticker:
             st.warning("Please enter a ticker symbol to begin.")
+        elif not re.fullmatch(r"[A-Za-z0-9.\-]{1,10}", ticker):
+            st.warning("Please enter a valid ticker (1-10 chars: letters, numbers, '.', '-').")
         else:
             with st.spinner(f"Agent is analyzing {ticker.upper()} via Amazon Bedrock..."):
                 # Call our Bedrock function
                 report = invoke_equity_research_agent(ticker)
-                
-                st.success("Analysis Complete!")
-                
-                # Display the structured report in a nice container
-                with st.container(border=True):
-                    st.markdown(report)
-                    
+
+                if report.startswith("An error occurred") or report.startswith("Failed to initialize Amazon Bedrock client"):
+                    st.error(report)
+                else:
+                    st.success("Analysis Complete!")
+
+                    # Display the structured report in a nice container
+                    with st.container(border=True):
+                        st.markdown(report)
     st.divider()
     st.caption("Powered by Amazon Bedrock & Claude 3.5 Sonnet")
 
