@@ -50,10 +50,12 @@ def invoke_equity_research_agent(ticker: str) -> str:
         }
     ]
     
+    if bedrock_runtime is None:
+        return f"Failed to initialize Amazon Bedrock client. Did you run 'aws configure'? Error: {_bedrock_init_error}"
+
     try:
         # Invoking the model with our system prompt and messages
         response = bedrock_runtime.converse(
-            modelId=model_id,
             messages=messages,
             system=[{"text": SYSTEM_PROMPT}],
             inferenceConfig={
