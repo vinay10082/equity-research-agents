@@ -4,10 +4,12 @@ import json
 
 # We initialize the Bedrock runtime client which allows us to invoke models.
 # Make sure your AWS CLI is configured with the correct region (e.g., us-east-1)
+bedrock_runtime = None
+_bedrock_init_error = None
 try:
-    bedrock_runtime = boto3.client(service_name='bedrock-runtime')
+    bedrock_runtime = boto3.client(service_name="bedrock-runtime")
 except Exception as e:
-    st.error(f"Failed to initialize boto3 client. Did you run 'aws configure'? Error: {e}")
+    _bedrock_init_error = e
 
 # This system prompt acts as our "Guardrail" and "Reasoning Engine". 
 # It strictly forbids the model from giving financial advice and forces a structured output.
