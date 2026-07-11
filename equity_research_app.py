@@ -1,6 +1,6 @@
 import boto3
 import streamlit as st
-import json
+import re
 
 # We initialize the Bedrock runtime client which allows us to invoke models.
 # Make sure your AWS CLI is configured with the correct region (e.g., us-east-1)
