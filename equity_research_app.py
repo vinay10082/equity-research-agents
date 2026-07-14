@@ -1,6 +1,11 @@
+import os
 import boto3
 import streamlit as st
 import re
+from dotenv import load_dotenv
+
+# Load environment variables from .env file (if present)
+load_dotenv()
 
 # We initialize the Bedrock runtime client which allows us to invoke models.
 # Make sure your AWS CLI is configured with the correct region (e.g., us-east-1)
@@ -36,11 +41,11 @@ or what objective macroeconomic data shows. If you violate this rule, the system
 
 def invoke_equity_research_agent(ticker: str) -> str:
     """
-    Calls the Amazon Bedrock Converse API using Claude 3.5 Sonnet.
+    Calls the Amazon Bedrock Converse API using Amazon Nova Micro 1.0.
     Passes the strict system prompt and the user's ticker query.
     """
-    # We use Claude 3.5 Sonnet as our reasoning engine (Module 2)
-    model_id = "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    # We use Amazon Nova Micro 1.0 as our reasoning engine (Module 2)
+    model_id = "amazon.nova-micro-v1:0"
     
     # Constructing the message payload for the Converse API
     messages = [
@@ -56,6 +61,7 @@ def invoke_equity_research_agent(ticker: str) -> str:
     try:
         # Invoking the model with our system prompt and messages
         response = bedrock_runtime.converse(
+            modelId=model_id,
             messages=messages,
             system=[{"text": SYSTEM_PROMPT}],
             inferenceConfig={
@@ -107,7 +113,7 @@ def main():
                     with st.container(border=True):
                         st.markdown(report)
     st.divider()
-    st.caption("Powered by Amazon Bedrock & Claude 3.5 Sonnet")
+    st.caption("Powered by Amazon Bedrock & Amazon Nova Micro 1.0")
 
 if __name__ == "__main__":
     main()
