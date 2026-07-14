@@ -4,12 +4,16 @@ You are an objective, highly analytical financial data synthesizer. When a user 
 
 ## Overview
 
-This repository contains an **Objective Equity Research Agent** built using Streamlit and Amazon Bedrock (Amazon Nova Micro 1.0). The application provides a structured, factual synthesis of a given company's financial performance, headwinds/tailwinds, and forward guidance. It implements strict guardrails to prevent it from providing investment advice, stock ratings, or predicting stock prices.
+This repository contains an **Objective Equity Research Agent** built using Streamlit and Google Gemini. The application provides a structured, factual synthesis of a given company's financial performance, headwinds/tailwinds, and forward guidance. It implements strict guardrails to prevent it from providing investment advice, stock ratings, or predicting stock prices.
 
 ## Prerequisites
 
-- AWS CLI configured (`aws configure`) with valid credentials and the appropriate region (e.g., `us-east-1`) to access Amazon Bedrock.
-- Python 3.10+ with dependencies installed: `python -m pip install streamlit boto3`
+- Python 3.10+ with dependencies installed: `python -m pip install streamlit google-generativeai python-dotenv`
+- Create a `.env` file in the root directory and add your Google Gemini API key:
+   ```env
+   GOOGLE_API_KEY="your_google_ai_studio_api_key_here"
+   ```
+   *(You can get your API key from [Google AI Studio](https://aistudio.google.com/))*
 
 ## How to Run
 
@@ -20,7 +24,7 @@ This repository contains an **Objective Equity Research Agent** built using Stre
 
 2. Run the Streamlit application:
    ```bash
-   streamlit run equity_research_app.py
+   streamlit run agent.py
    ```
    *(This command starts a local web server, executes the Python script, and automatically opens the interactive web app in your default browser).*
 

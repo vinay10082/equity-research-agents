@@ -1,0 +1,11 @@
+streamlit
+python-dotenv
+langchain
+langchain-google-genai
+langgraph
+qdrant-client
+langchain-qdrant
+yfinance
+duckduckgo-search
+pypdf
+langchain-community
